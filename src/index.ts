@@ -5,13 +5,9 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import * as dynamoose from "dynamoose";
-import serverless from "serverless-http";
 import seed from "./seed/seedDynamodb";
 /* ROUTE IMPORTS */
 import courseRoutes from "./routes/courseRoutes";
-import userClerkRoutes from "./routes/userClerkRoutes";
-import transactionRoutes from "./routes/transactionRoutes";
-import userCourseProgressRoutes from "./routes/userCourseProgressRoutes";
 
 /* CONFIGURATIONS */
 dotenv.config();
