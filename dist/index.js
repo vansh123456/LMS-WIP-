@@ -65,7 +65,7 @@ app.get("/", (req, res) => {
 });
 app.use("/courses", courseRoutes_1.default);
 /* SERVER */
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 if (!isProduction) {
     app.listen(port, () => {
         console.log(`Server running on port ${port}`);
