@@ -127,7 +127,7 @@ const Landing = () => {
         </div>
 
         <div className="landing__courses">
-          {courses &&
+          {Array.isArray(courses) &&
             courses.slice(0, 4).map((course, index) => (
               <motion.div
                 key={course.courseId}
