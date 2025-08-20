@@ -8,12 +8,13 @@ import * as dynamoose from "dynamoose";
 import seed from "./seed/seedDynamodb";
 /* ROUTE IMPORTS */
 import courseRoutes from "./routes/courseRoutes";
+import authRoutes from "./routes/authRoutes";
 
 /* CONFIGURATIONS */
 dotenv.config();
 const isProduction = process.env.NODE_ENV === "production";
 if (!isProduction) {
-  dynamoose.aws.ddb.local();
+  dynamoose.aws.ddb.local("http://localhost:8000");
 }
 
 const app = express();
@@ -29,6 +30,8 @@ app.use(cors());
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+
+app.use("/auth", authRoutes);
 
 app.use("/courses",courseRoutes);
 
