@@ -7,6 +7,7 @@ interface User {
   email: string;
   name: string;
   avatar?: string;
+  role: string;
 }
 
 interface AuthContextType {
@@ -14,7 +15,9 @@ interface AuthContextType {
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
+  registerTeacher: (name: string, email: string, password: string) => Promise<void>;
   googleLogin: (idToken: string) => Promise<void>;
+  upgradeToTeacher: () => Promise<void>;
   logout: () => void;
   loading: boolean;
 }
@@ -96,6 +99,31 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const registerTeacher = async (name: string, email: string, password: string) => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register/teacher`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Teacher registration failed");
+      }
+
+      setToken(data.token);
+      setUser(data.user);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const googleLogin = async (idToken: string) => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/google`, {
@@ -121,6 +149,31 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const upgradeToTeacher = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/upgrade-to-teacher`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Upgrade to teacher failed");
+      }
+
+      setToken(data.token);
+      setUser(data.user);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const logout = () => {
     setToken(null);
     setUser(null);
@@ -135,7 +188,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         token,
         login,
         register,
+        registerTeacher,
         googleLogin,
+        upgradeToTeacher,
         logout,
         loading,
       }}

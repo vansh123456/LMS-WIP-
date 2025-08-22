@@ -134,12 +134,20 @@ export default function SignUp() {
 
           <div id="google-signup-button" className="flex justify-center"></div>
 
-          <div className="text-center text-sm">
-            Already have an account?{" "}
-            <Link href="/auth/signin" className="text-blue-600 hover:underline">
-              Sign in
-            </Link>
-          </div>
+          <div className="text-center text-sm space-y-2">
+            <p>
+              Already have an account?{" "}
+              <Link href="/auth/signin" className="text-blue-600 hover:underline">
+                Sign in
+              </Link>
+            </p>
+            <p>
+              Want to sign up as a teacher?{" "}
+              <Link href="/auth/signup/teacher" className="text-blue-600 hover:underline">
+                Sign up as Teacher
+              </Link>
+            </p>
+            </div>
         </CardContent>
       </Card>
     </div>
