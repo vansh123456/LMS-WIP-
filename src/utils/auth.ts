@@ -12,6 +12,7 @@ export interface JWTPayload {
   userId: string;
   email: string;
   name: string;
+  role: string;
 }
 
 export const generateToken = (payload: JWTPayload): string => {
@@ -31,7 +32,8 @@ export const verifyToken = (token: string): JWTPayload => {
     decoded !== null &&
     "userId" in decoded &&
     "email" in decoded &&
-    "name" in decoded
+    "name" in decoded &&
+    "role" in decoded
   ) {
     return decoded as JWTPayload;
   }

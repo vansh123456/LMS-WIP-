@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var dynamoose_1 = require("dynamoose");
-var transactionSchema = new dynamoose_1.Schema({
+const dynamoose_1 = require("dynamoose");
+const transactionSchema = new dynamoose_1.Schema({
     userId: {
         type: String,
         hashKey: true,
@@ -34,5 +34,5 @@ var transactionSchema = new dynamoose_1.Schema({
     saveUnknown: true,
     timestamps: true,
 });
-var Transaction = (0, dynamoose_1.model)("Transaction", transactionSchema);
+const Transaction = (0, dynamoose_1.model)("Transaction", transactionSchema);
 exports.default = Transaction;

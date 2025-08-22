@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var dynamoose_1 = require("dynamoose");
-var chapterProgressSchema = new dynamoose_1.Schema({
+const dynamoose_1 = require("dynamoose");
+const chapterProgressSchema = new dynamoose_1.Schema({
     chapterId: {
         type: String,
         required: true,
@@ -11,7 +11,7 @@ var chapterProgressSchema = new dynamoose_1.Schema({
         required: true,
     },
 });
-var sectionProgressSchema = new dynamoose_1.Schema({
+const sectionProgressSchema = new dynamoose_1.Schema({
     sectionId: {
         type: String,
         required: true,
@@ -21,7 +21,7 @@ var sectionProgressSchema = new dynamoose_1.Schema({
         schema: [chapterProgressSchema],
     },
 });
-var userCourseProgressSchema = new dynamoose_1.Schema({
+const userCourseProgressSchema = new dynamoose_1.Schema({
     userId: {
         type: String,
         hashKey: true,
@@ -51,5 +51,5 @@ var userCourseProgressSchema = new dynamoose_1.Schema({
 }, {
     timestamps: true,
 });
-var UserCourseProgress = (0, dynamoose_1.model)("UserCourseProgress", userCourseProgressSchema);
+const UserCourseProgress = (0, dynamoose_1.model)("UserCourseProgress", userCourseProgressSchema);
 exports.default = UserCourseProgress;

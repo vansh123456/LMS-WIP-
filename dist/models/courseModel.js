@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var dynamoose_1 = require("dynamoose");
-var commentSchema = new dynamoose_1.Schema({
+const dynamoose_1 = require("dynamoose");
+const commentSchema = new dynamoose_1.Schema({
     commentId: {
         type: String,
         required: true,
@@ -19,7 +19,7 @@ var commentSchema = new dynamoose_1.Schema({
         required: true,
     },
 });
-var chapterSchema = new dynamoose_1.Schema({
+const chapterSchema = new dynamoose_1.Schema({
     chapterId: {
         type: String,
         required: true,
@@ -45,7 +45,7 @@ var chapterSchema = new dynamoose_1.Schema({
         type: String,
     },
 });
-var sectionSchema = new dynamoose_1.Schema({
+const sectionSchema = new dynamoose_1.Schema({
     sectionId: {
         type: String,
         required: true,
@@ -62,7 +62,7 @@ var sectionSchema = new dynamoose_1.Schema({
         schema: [chapterSchema],
     },
 });
-var courseSchema = new dynamoose_1.Schema({
+const courseSchema = new dynamoose_1.Schema({
     courseId: {
         type: String,
         hashKey: true,
@@ -121,5 +121,5 @@ var courseSchema = new dynamoose_1.Schema({
 }, {
     timestamps: true,
 });
-var Course = (0, dynamoose_1.model)("Course", courseSchema);
+const Course = (0, dynamoose_1.model)("Course", courseSchema);
 exports.default = Course;

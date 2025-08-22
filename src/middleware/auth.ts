@@ -6,6 +6,7 @@ export interface AuthenticatedRequest extends Request {
       userId: string;
       email: string;
       name: string;
+      role: string;
     };
   }
 
@@ -25,3 +26,26 @@ export interface AuthenticatedRequest extends Request {
     }
   };
 
+  export const requireTeacher = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    if (!req.user) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+    
+    if (req.user.role !== "teacher") {
+      return res.status(403).json({ message: "Teacher access required" });
+    }
+    
+    next();
+  };
+
+  export const requireUser = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+    if (!req.user) {
+      return res.status(401).json({ message: "Authentication required" });
+    }
+    
+    if (req.user.role !== "user" && req.user.role !== "teacher") {
+      return res.status(403).json({ message: "User access required" });
+    }
+    
+    next();
+  };

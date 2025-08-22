@@ -26,6 +26,12 @@ const userSchema = new dynamoose.Schema({
     type: String,
     required: false,
   },
+  role: {
+    type: String,
+    required: true,
+    default: "user",
+    enum: ["user", "teacher"],
+  },
   provider: {
     type: String,
     required: true,
