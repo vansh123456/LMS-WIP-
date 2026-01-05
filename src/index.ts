@@ -5,10 +5,12 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import * as dynamoose from "dynamoose";
+
 import seed from "./seed/seedDynamodb";
 /* ROUTE IMPORTS */
 import courseRoutes from "./routes/courseRoutes";
 import authRoutes from "./routes/authRoutes";
+import transactionRoutes from "./routes/transactionRoutes";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -34,6 +36,7 @@ app.get("/", (req, res) => {
 app.use("/auth", authRoutes);
 
 app.use("/courses",courseRoutes);
+app.use("/transactions",transactionRoutes);
 
 /* SERVER */
 const port = process.env.PORT || 4000;

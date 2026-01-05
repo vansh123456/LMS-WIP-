@@ -46,6 +46,7 @@ const dynamoose = __importStar(require("dynamoose"));
 /* ROUTE IMPORTS */
 const courseRoutes_1 = __importDefault(require("./routes/courseRoutes"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
+const transactionRoutes_1 = __importDefault(require("./routes/transactionRoutes"));
 /* CONFIGURATIONS */
 dotenv_1.default.config();
 const isProduction = process.env.NODE_ENV === "production";
@@ -66,6 +67,7 @@ app.get("/", (req, res) => {
 });
 app.use("/auth", authRoutes_1.default);
 app.use("/courses", courseRoutes_1.default);
+app.use("/transactions", transactionRoutes_1.default);
 /* SERVER */
 const port = process.env.PORT || 4000;
 if (!isProduction) {
